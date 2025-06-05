@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Show success in modal and redirect
-    function showSuccess(message) {
+    function showSuccess(message, redirectUrl) {
         document.getElementById('successMessage').textContent = message;
         successModal.show();
         
-        // Redirect to dashboard after 2 seconds
+        // Redirect to appropriate dashboard after 2 seconds
         setTimeout(() => {
-            window.location.href = 'Dashboard.php';
+            window.location.href = redirectUrl;
         }, 2000);
     }
 
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                showSuccess(data.message);
+                showSuccess(data.message, data.redirect_url);
             } else {
                 showError(data.message);
             }

@@ -29,8 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Check if user exists
-    $stmt = $conn->prepare("SELECT user_id, full_name, password, role_id FROM tbl_users WHERE email = ?");
+    // Check if user exists and get role information
+    $stmt = $conn->prepare("
+        SELECT u.user_id, u.full_name, u.password, u.role_id, r.role_name 
+        FROM tbl_users u 
+        JOIN tbl_roles r ON u.role_id = r.role_id 
+        WHERE u.email = ?
+    ");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -44,8 +49,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['full_name'] = $user['full_name'];
             $_SESSION['role_id'] = $user['role_id'];
+            $_SESSION['role_name'] = $user['role_name'];
             
-            echo json_encode(['success' => true, 'message' => 'Login successful! Redirecting to dashboard...']);
+            // Log successful login activity
+            $log_user_id = $user['user_id'];
+            $log_action = "User logged in";
+            $log_stmt = $conn->prepare("INSERT INTO tbl_logs (user_id, action) VALUES (?, ?)");
+            $log_stmt->bind_param("is", $log_user_id, $log_action);
+            $log_stmt->execute();
+            
+            // Determine redirect URL based on role
+            $redirect_url = '';
+            switch(strtolower($user['role_name'])) {
+                case 'admin':
+                    $redirect_url = 'Dashboard.php';
+                    break;
+                case 'employee':
+                    $redirect_url = 'employee.php';
+                    break;
+                case 'cashier':
+                    $redirect_url = 'cashier.php';
+                    break;
+                case 'customer':
+                    $redirect_url = 'customer.php';
+                    break;
+                default:
+                    $redirect_url = 'Dashboard.php';
+            } 
+            
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Login successful! Redirecting...',
+                'redirect_url' => $redirect_url
+            ]);
             exit();
         } else {
             echo json_encode(['success' => false, 'message' => 'Invalid password']);
