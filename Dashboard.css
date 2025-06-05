@@ -1,0 +1,255 @@
+/* Universal styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    border: 2px solid green;
+}
+
+/* Top Navigation Bar */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #000;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.toggle-sidebar {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.toggle-sidebar:hover {
+    color: #007bff;
+}
+
+.nav-title {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-right i {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.nav-right i:hover {
+    color: #007bff;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 0.9rem;
+}
+
+/* Sidebar styles */
+.offcanvas {
+    background-color: #000 !important;
+    color: white;
+    transition: transform 0.3s ease-in-out;
+    top: 60px; /* Add top margin to account for nav bar */
+}
+
+.offcanvas-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.offcanvas-title {
+    color: white;
+}
+
+.offcanvas .btn-close {
+    filter: invert(1) grayscale(100%) brightness(1000%);
+    opacity: 1;
+}
+
+/* Navigation menu styles */
+.nav-menu {
+    padding: 1rem 0;
+    height: 100%;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.nav-link span {
+    color: yellow;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link:hover span {
+    color: white;
+}
+
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active span {
+    color: white;
+}
+
+.nav-link i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Main content styles */
+main {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    transition: all 0.3s ease-in-out;
+    border: 2px solid red;
+    padding: 0;
+    float: right;
+    margin-top: 60px; /* Add top margin to account for nav bar */
+    will-change: transform, width, margin-left;
+}
+
+.container1 {
+    background-color: #a17144;
+    color: white;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    border: 2px solid yellow;
+    margin: 0;
+}
+
+.content-section {
+    padding: 20px;
+    min-height: calc(100vh - 100px);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease-in-out;
+}
+
+.content-section.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Fade out animation */
+.content-section.fade-out {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Responsive styles */
+@media (min-width: 992px) {
+    .offcanvas {
+        width: 300px;
+        transform: translateX(-100%);
+        float: left;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .offcanvas.show {
+        transform: translateX(0);
+    }
+
+    main {
+        margin: 60px 0 0 0; /* Adjust margin to account for nav bar */
+        width: 100%;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* When sidebar is open */
+    .offcanvas.show ~ main {
+        width: calc(100% - 400px);
+        margin-left: 300px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* When sidebar is closed */
+    .offcanvas:not(.show) ~ main {
+        width: 100%;
+        margin: 60px 0 0 0; /* Adjust margin to account for nav bar */
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 991px) {
+    .offcanvas {
+        width: 100%;
+        position: fixed;
+        z-index: 1045;
+    }
+
+    main {
+        width: 100% !important;
+        margin: 60px 0 0 0 !important; /* Adjust margin to account for nav bar */
+        float: none;
+        position: relative;
+    }
+
+    .container1 {
+        width: 100%;
+        padding: 15px;
+    }
+
+    /* When sidebar is open on mobile */
+    .offcanvas.show ~ main {
+        width: 100% !important;
+        margin: 60px 0 0 0 !important; /* Adjust margin to account for nav bar */
+    }
+}
