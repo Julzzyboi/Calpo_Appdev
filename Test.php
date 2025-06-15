@@ -56,7 +56,7 @@ $conn->close();
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="customer.css">
+    <link rel="stylesheet" href="Test.css">
      <!-- Link to custom CSS for card styling -->
 
 </head>
@@ -67,10 +67,10 @@ $conn->close();
         <nav class="top-nav">
             <div class="nav-left">
                 <!-- Toggle button for Bootstrap Offcanvas -->
+                <!-- Use data-bs-toggle and data-bs-target to link to the offcanvas -->
                 <button class="btn btn-outline-secondary me-2 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#testOffcanvas" aria-controls="testOffcanvas">
                     <i class="fas fa-bars"></i>
                 </button>
-                <img src="uploads/logo.jpg" alt="Logo" class="nav-logo">
                 <h4 class="nav-title">Menu</h4>
             </div>
 
@@ -148,11 +148,9 @@ $conn->close();
          <div class="main-content">
             <div class="row">
                 <!-- Product Display Area -->
-                <div class="col-md-9">
-                    <div class="card-wrap">
-                        <div id="product-list">
-                            <!-- Product cards will be loaded here by JavaScript -->
-                        </div>
+                <div class="col-md-9 ">
+                    <div id="product-list" class="row">
+                        <!-- Product cards will be loaded here by JavaScript -->
                     </div>
                 </div>
 
@@ -166,7 +164,7 @@ $conn->close();
                             <!-- Cart items will be loaded here by JavaScript -->
                              <li class="list-group-item text-muted" id="empty-cart-message">Your cart is empty</li>
                         </ul>
-                        <div class="card-body1 shop-card">
+                        <div class="card-body">
                              <h6 class="card-title">Total: ₱<span id="cart-total">0.00</span></h6>
                             <button class="btn btn-success btn-sm" id="checkout-btn" disabled>Checkout</button>
                             <button class="btn btn-danger btn-sm" id="clear-cart-btn" disabled>Clear Cart</button>
@@ -179,63 +177,6 @@ $conn->close();
 
     <!-- Bootstrap Bundle JS (includes Popper and Offcanvas JS) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Payment Method Modal -->
-    <div class="modal fade" id="paymentMethodModal" tabindex="-1" aria-labelledby="paymentMethodModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="paymentMethodModalLabel">Select Payment Method</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="paymentMethodForm">
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment_method" id="paymentCash" value="Cash" checked>
-                                <label class="form-check-label" for="paymentCash">
-                                    Cash
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment_method" id="paymentEPayment" value="E-Payment">
-                                <label class="form-check-label" for="paymentEPayment">
-                                    E-Payment
-                                </label>
-                            </div>
-                        </div>
-
-                        <div id="ePaymentOptions" style="display: none;">
-                            <h6 class="mt-3">Choose E-Payment Method:</h6>
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="e_payment_method" id="ePaymentGcash" value="GCash">
-                                    <label class="form-check-label" for="ePaymentGcash">
-                                        GCash
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="e_payment_method" id="ePaymentPaymaya" value="PayMaya">
-                                    <label class="form-check-label" for="ePaymentPaymaya">
-                                        PayMaya
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="e_payment_method" id="ePaymentBank" value="Bank Transfer">
-                                    <label class="form-check-label" for="ePaymentBank">
-                                        Bank Transfer
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="confirmPaymentBtn">Confirm Payment</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <script>
         // Embed product data from PHP (now fetching from tbl_products again)
         const allProducts = <?php echo json_encode($products); ?>;
@@ -255,32 +196,32 @@ $conn->close();
             productListDiv.innerHTML = ''; // Clear current products
 
             if (productsToRender.length === 0) {
-                productListDiv.innerHTML = '<p>No products found in this category.</p>';
-                return;
+                 productListDiv.innerHTML = '<p>No products found in this category.</p>';
+                 return;
             }
 
             productsToRender.forEach(product => {
                 const productCardHtml = `
-                    <div class="custom-card">
-                        <div class="product-image-wrap">
-                            <div class="product-image">
-                                <img src="${product.product_image && product.product_image !== '' ? product.product_image : 'uploads/no-image.png'}" class="card-img-top" alt="${product.product_name}">
+                    <div class="col-md-4 mb-4">
+                        <div class="custom-card">
+                            <img src="${product.product_image && product.product_image !== '' ? product.product_image : 'uploads/no-image.png'}" class="card-img-top" alt="${product.product_name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.product_name}</h5>
+                                <p class="card-category">${product.Category}</p>
+                                <p class="card-text">${product.description.substring(0, 100)}...</p>
+                                <p class="card-price">₱${parseFloat(product.price).toFixed(2)}</p>
+                                <button class="btn btn-primary btn-sm add-to-cart-btn" data-product-id="${product.product_id}">
+                                    <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                                </button>
                             </div>
                         </div>
-                        <h5 class="product-title">${product.product_name}</h5>
-                        <p class="product-category">${product.Category}</p>
-                        <p class="product-text">${product.description.substring(0, 100)}...</p>
-                        <p class="product-price">₱${parseFloat(product.price).toFixed(2)}</p>
-                        <button class="btn-add" data-product-id="${product.product_id}">
-                            <i class="fas fa-cart-plus"></i>
-                        </button>
                     </div>
                 `;
                 productListDiv.innerHTML += productCardHtml;
             });
 
             // Add event listeners to the new buttons
-            document.querySelectorAll('.btn-add').forEach(button => {
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     const productId = parseInt(this.getAttribute('data-product-id'));
                     addProductToCart(productId);
@@ -536,99 +477,41 @@ $conn->close();
              // Basic Checkout button functionality (can be expanded)
             document.getElementById('checkout-btn').addEventListener('click', function() {
                 if (cart.length > 0) {
-                    // Open the payment method modal instead of direct checkout
-                    const paymentMethodModal = new bootstrap.Modal(document.getElementById('paymentMethodModal'));
-                    paymentMethodModal.show();
+                    //alert('Proceeding to checkout with ' + cart.length + ' item(s). Total: ₱' + document.getElementById('cart-total').textContent);
+                    // Here you would typically redirect to a checkout page or send data to backend
+
+                    // Prepare data to send
+                    const cartData = JSON.stringify(cart);
+
+                    // Send cart data to backend using Fetch API
+                    fetch('checkout.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded', // Use this for $_POST
+                        },
+                         // Send as form data
+                        body: 'cart=' + encodeURIComponent(cartData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Checkout successful! ' + data.message);
+                            // Clear cart on success
+                            cart = [];
+                            renderCart(); // Update UI
+                            localStorage.removeItem('customerCart'); // Clear localStorage
+                        } else {
+                            alert('Checkout failed: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error during checkout:', error);
+                        alert('An error occurred during checkout.');
+                    });
 
                 } else {
                      alert('Your cart is empty!');
                 }
-            });
-
-            // JavaScript for Payment Method Modal
-            const paymentCashRadio = document.getElementById('paymentCash');
-            const paymentEPaymentRadio = document.getElementById('paymentEPayment');
-            const ePaymentOptionsDiv = document.getElementById('ePaymentOptions');
-            const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
-
-            // Function to toggle e-payment options visibility
-            function toggleEPaymentOptions() {
-                if (paymentEPaymentRadio.checked) {
-                    ePaymentOptionsDiv.style.display = 'block';
-                } else {
-                    ePaymentOptionsDiv.style.display = 'none';
-                }
-            }
-
-            // Add event listeners for radio button changes
-            paymentCashRadio.addEventListener('change', toggleEPaymentOptions);
-            paymentEPaymentRadio.addEventListener('change', toggleEPaymentOptions);
-
-            // Initial call to set correct visibility based on default checked radio
-            toggleEPaymentOptions();
-
-            // Handle Confirm Payment button click
-            confirmPaymentBtn.addEventListener('click', function() {
-                let selectedPaymentMethod = '';
-                let selectedEPaymentMethod = '';
-
-                if (paymentCashRadio.checked) {
-                    selectedPaymentMethod = paymentCashRadio.value; // "Cash"
-                } else if (paymentEPaymentRadio.checked) {
-                    selectedPaymentMethod = paymentEPaymentRadio.value; // "E-Payment"
-
-                    // Get selected e-payment method
-                    const selectedEPaymentRadio = document.querySelector('input[name="e_payment_method"]:checked');
-                    if (selectedEPaymentRadio) {
-                        selectedEPaymentMethod = selectedEPaymentRadio.value;
-                    } else {
-                        alert('Please select an E-Payment method.');
-                        return; // Stop if E-Payment is selected but no sub-method is chosen
-                    }
-                }
-
-                // Combine payment methods for backend if it's e-payment
-                let finalPaymentMethod = selectedPaymentMethod;
-                if (selectedPaymentMethod === 'E-Payment' && selectedEPaymentMethod) {
-                    finalPaymentMethod = `${selectedPaymentMethod} (${selectedEPaymentMethod})`;
-                }
-
-                // Prepare data to send to checkout.php
-                const cartData = JSON.stringify(cart);
-                const formData = new URLSearchParams();
-                formData.append('cart', cartData);
-                formData.append('payment_method', finalPaymentMethod);
-
-                // Close the modal before sending the request
-                const paymentMethodModal = bootstrap.Modal.getInstance(document.getElementById('paymentMethodModal'));
-                if (paymentMethodModal) {
-                    paymentMethodModal.hide();
-                }
-
-                // Send cart data and payment method to backend using Fetch API
-                fetch('checkout.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: formData.toString()
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Checkout successful! ' + data.message);
-                        // Clear cart on success
-                        cart = [];
-                        renderCart(); // Update UI
-                        localStorage.removeItem('customerCart'); // Clear localStorage
-                    } else {
-                        alert('Checkout failed: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error during checkout:', error);
-                    alert('An error occurred during checkout.');
-                });
             });
 
              // Clear Cart button functionality

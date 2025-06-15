@@ -1,0 +1,118 @@
+/* Define color palette as CSS variables */
+:root {
+    --color-palette-1: #e5d2c3; /* Lightest */
+    --color-palette-2: #d9bfa9;
+    --color-palette-3: #79665a;
+    --color-palette-4: #341609; /* Darkest */
+    --color-palette-5: #fefefc; /* Near white */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Add custom styles here */
+body {
+    padding-top: 65px;
+    /* Adjust based on top nav height */
+    overflow-x: hidden; /* Prevent horizontal scrollbar when sidebar is off-screen */
+    
+}
+
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    /* Bootstrap navbar default z-index */
+    background-color: var(--color-palette-4);
+    /* Light background color */
+    padding: 0.5rem 1rem;
+    display: flex;
+    /* Use flexbox for alignment */
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-title {
+    margin-left: 10px;
+    margin-bottom: 0;
+    color: var(--color-palette-2);
+}
+
+.main-content {
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+    background-color: var(--color-palette-1);
+    margin-top: 40px;
+    min-height: 100vh;
+}
+
+/* Styles for navigation links within the top navigation on LARGE screens */
+/* Target the specific div containing these links */
+.top-nav .d-lg-flex.justify-content-center .nav-link {
+    padding: 0.5rem 1rem;
+    color:var(--color-palette-1);
+    text-decoration: none;
+    cursor: pointer;
+    /* Ensure display is inline-block or similar for horizontal layout */
+    display: inline-block;
+}
+
+/* Active state for navigation links in the top navigation */
+.top-nav .d-lg-flex.justify-content-center .nav-link.active {
+    font-weight: bold;
+    border-bottom: 2px solid var(--color-palette-2);
+}
+
+/* Content Sections */
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Styles for the Bootstrap Offcanvas sidebar */
+.offcanvas {
+    /* Override Bootstrap's background color variable */
+    --bs-offcanvas-bg: var(--color-palette-5);
+    /* Fallback for older browsers (less ideal) */
+    /* background-color: var(--color-palette-5); */
+}
+
+.offcanvas-title{
+    color: var(--color-palette-2);
+}
+
+/* Styles for navigation links inside the offcanvas body */
+.offcanvas-body .nav-link {
+    padding: 0.5rem 1rem;
+    color: var(--color-palette-1); /* Example color for sidebar links */
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    /* Make links block level for easier clicking in sidebar */
+    width: 100%; /* Full width in sidebar */
+    margin-bottom: 5px; /* Space out links */
+}
+
+.offcanvas-body .nav-link.active {
+    font-weight: bold;
+    color: var(--color-palette-2); /* Example active color */
+     /* Optional: Add a background color for active state in sidebar */
+
+}

@@ -65,16 +65,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $redirect_url = 'Dashboard.php';
                     break;
                 case 'employee':
-                    $redirect_url = 'employee.php';
+                    $redirect_url = 'Employee.php';
                     break;
                 case 'cashier':
-                    $redirect_url = 'cashier.php';
+                    $redirect_url = 'Cashier.php';
                     break;
                 case 'customer':
-                    $redirect_url = 'customer.php';
+                    $redirect_url = 'Customer.php';
                     break;
                 default:
-                    $redirect_url = 'Dashboard.php';
+                    $redirect_url = 'Customer.php';
             } 
             
             echo json_encode([
@@ -100,25 +100,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+   <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .error {
-            color: red;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-        .form-container {
-            max-width: 400px;
-            margin: 2rem auto;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .is-invalid {
-            border-color: #dc3545 !important;
-        }
-    </style>
 </head>
 <body>
     <div class="container">

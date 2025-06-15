@@ -94,28 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="Register.css">
-    <style>
-        .error {
-            color: red;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-        .form-container {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .preview-image {
-            max-width: 200px;
-            max-height: 200px;
-            margin-top: 10px;
-        }
-        .is-invalid {
-            border-color: #dc3545 !important;
-        }
-    </style>
+    
 </head>
 <body>
     <div class="container">
@@ -146,15 +125,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="mb-3">
                     <label for="password" class="form-label">Password:</label>
-                    <input type="password" class="form-control" 
-                           id="password" name="password">
+                    <div class="password-field-wrapper">
+                        <input type="password" class="form-control" 
+                               id="password" name="password">
+                        <button type="button" class="password-toggle" tabindex="-1">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                    </div>
                     <div class="error"></div>
                 </div>
 
                 <div class="mb-3">
                     <label for="confirm_password" class="form-label">Confirm Password:</label>
-                    <input type="password" class="form-control" 
-                           id="confirm_password" name="confirm_password">
+                    <div class="password-field-wrapper">
+                        <input type="password" class="form-control" 
+                               id="confirm_password" name="confirm_password">
+                        <button type="button" class="password-toggle" tabindex="-1">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                    </div>
                     <div class="error"></div>
                 </div>
 

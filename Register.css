@@ -1,3 +1,82 @@
+/* Define color palette as CSS variables */
+:root {
+    --color-palette-1: #e5d2c3; /* Lightest */
+    --color-palette-2: #d9bfa9;
+    --color-palette-3: #79665a;
+    --color-palette-4: #341609; /* Darkest */
+    --color-palette-5: #fefefc; /* Near white */
+}
+
+body {
+    background-color: var(--color-palette-3) !important;
+}
+
+.error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 10px rgba(0,0,0,0.5);
+    background-color: var(--color-palette-2);
+}
+
+.form-control {
+    background-color: var(--color-palette-5);
+    border: 2px solid var(--color-palette-4);
+    color: var(--color-palette-4);
+}
+
+.form-control:focus {
+    background-color: var(--color-palette-5) !important;
+    border-color: var(--color-palette-3) !important;
+    box-shadow: 0 0 0 0.25rem rgba(121, 102, 90, 0.25) !important;
+}
+
+.btn-primary {
+    background-color: var(--color-palette-4) !important;
+    border: 2px solid var(--color-palette-4) !important;
+    color: var(--color-palette-2) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-palette-2) !important;
+    border-color: var(--color-palette-4) !important;
+    color: var(--color-palette-4) !important;
+}
+
+.preview-image {
+    max-width: 200px;
+    max-height: 200px;
+    margin-top: 10px;
+    border: 2px solid var(--color-palette-4);
+    border-radius: 5px;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545 !important;
+    background-image: none !important;
+}
+
+.form-control.is-invalid + .error {
+    display: block;
+}
+
+.form-control.is-valid {
+    border-color: #198754 !important;
+    background-image: none !important;
+}
+
+.form-control.is-valid + .error {
+    display: none;
+}
+
 .custom-modal {
     display: none;
     position: fixed;
@@ -97,23 +176,9 @@
     }
 }
 
-/* Form validation styles */
-.is-invalid {
-    border-color: #dc3545 !important;
-}
-
-.error {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-    display: block;
-    min-height: 1.25rem;
-}
-
 /* Password field styles */
 .password-field-wrapper {
     position: relative;
-   
 }
 
 .password-field-wrapper input {
@@ -123,19 +188,19 @@
 .password-toggle {
     position: absolute;
     right: 10px;
-    top: 90%;
+    top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
-    color: #6c757d;
+    color: var(--color-palette-3);
     transition: color 0.2s;
     z-index: 2;
 }
 
 .password-toggle:hover {
-    color: #495057;
+    color: var(--color-palette-4);
 }
 
 .password-toggle:focus {

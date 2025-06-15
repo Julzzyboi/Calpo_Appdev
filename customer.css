@@ -1,0 +1,276 @@
+/* Define color palette as CSS variables */
+:root {
+    --color-palette-1: #e5d2c3; /* Lightest */
+    --color-palette-2: #d9bfa9;
+    --color-palette-3: #79665a;
+    --color-palette-4: #341609; /* Darkest */
+    --color-palette-5: #fefefc; /* Near white */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Add custom styles here */
+body {
+    padding-top: 65px;
+    /* Adjust based on top nav height */
+    overflow-x: hidden; /* Prevent horizontal scrollbar when sidebar is off-screen */
+    background: var(--color-palette-3);
+    
+}
+
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    /* Bootstrap navbar default z-index */
+    background-color: var(--color-palette-4);
+    /* Light background color */
+    padding: 0.5rem 1rem;
+    display: flex;
+    /* Use flexbox for alignment */
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-title {
+    margin-left: 0;
+    margin-bottom: 0;
+    color: var(--color-palette-2);
+}
+
+.main-content {
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+    background-color: var(--color-palette-3);
+    margin-top: 40px;
+    min-height: 100vh;
+}
+
+
+/* Styles for navigation links within the top navigation on LARGE screens */
+/* Target the specific div containing these links */
+.top-nav .d-lg-flex.justify-content-center .nav-link {
+    padding: 0.5rem 1rem;
+    color:var(--color-palette-1);
+    text-decoration: none;
+    cursor: pointer;
+    /* Ensure display is inline-block or similar for horizontal layout */
+    display: inline-block;
+}
+
+/* Active state for navigation links in the top navigation */
+.top-nav .d-lg-flex.justify-content-center .nav-link.active {
+    font-weight: bold;
+    border-bottom: 2px solid var(--color-palette-2);
+}
+
+/* Content Sections */
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Styles for the Bootstrap Offcanvas sidebar */
+.offcanvas {
+    /* Override Bootstrap's background color variable */
+    --bs-offcanvas-bg: var(--color-palette-5);
+    /* Fallback for older browsers (less ideal) */
+    /* background-color: var(--color-palette-5); */
+}
+
+.offcanvas-title{
+    color: var(--color-palette-2);
+}
+
+/* Styles for navigation links inside the offcanvas body */
+.offcanvas-body .nav-link {
+    padding: 0.5rem 1rem;
+    color: var(--color-palette-1); /* Example color for sidebar links */
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    /* Make links block level for easier clicking in sidebar */
+    width: 100%; /* Full width in sidebar */
+    margin-bottom: 5px; /* Space out links */
+}
+
+.offcanvas-body .nav-link.active {
+    font-weight: bold;
+    color: var(--color-palette-2); /* Example active color */
+     /* Optional: Add a background color for active state in sidebar */
+
+}
+
+/* for cart */
+.list-group-item#empty-cart-message {
+    list-style-type: none;
+}
+
+.card-wrap {
+    position: relative;
+    background-color: var(--color-palette-1);
+    border: 3px solid black;
+    border-radius: 10px;
+    min-height: 100vh;
+    padding: 20px;
+    width: 100%;
+}
+
+#product-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(350px, auto);
+    gap: 20px;
+    width: 100%;
+}
+
+.custom-card {
+    position: relative;
+    border: 2px solid black;
+    background-color: var(--color-palette-5);
+    width: 100%;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.5) !important;
+    transition: box-shadow 0.3s ease;
+}
+
+.product-image-wrap {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-palette-1);
+    border-radius: 0 0 15px 15px;
+    border-bottom: 3px solid black;
+    overflow: hidden;
+}
+
+.product-image {
+    position: relative;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 15px 15px;
+}
+
+.product-image img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0 0 15px 15px;
+}
+
+.product-title {
+    text-align: left;
+    color: var(--color-palette-4);
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    padding: 0 10px;
+    width: 100%;
+}
+
+.product-category {
+    text-align: left;
+    color: var(--color-palette-3);
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    padding: 0 10px;
+    width: 100%;
+}
+
+.product-text {
+    text-align: left;
+    color: var(--color-palette-3);
+    font-size: 0.8rem;
+    padding: 0 10px;
+    margin-bottom: 5px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.product-price {
+    text-align: left;
+    color: var(--color-palette-4);
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 5px 0;
+    padding: 0 10px;
+    width: 100%;
+}
+
+.btn-add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-palette-2);
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 2px solid var(--color-palette-4);
+    border-radius: 50%;
+    color: var(--color-palette-4);
+    font-weight: bold;
+    transition: all 0.3s ease;
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+}
+
+.btn-add i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.btn-add:hover {
+    background-color: var(--color-palette-4);
+    color: var(--color-palette-2);
+    transform: scale(1.1);
+}
+
+.btn-add:active {
+    transform: translateY(0);
+}
